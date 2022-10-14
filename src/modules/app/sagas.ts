@@ -2,7 +2,8 @@
 import { putAsync, takeEveryAsync } from 'saga-toolkit'
 import { actions as userActions } from '../user'
 import * as actions from './slice'
-import { put, takeEvery } from 'redux-saga/effects'
+import * as selectors from './selectors'
+import { put, takeEvery, select, take } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'connected-react-router'
 
 function* appStart() {
@@ -14,16 +15,19 @@ function* appStart() {
 }
 
 function* locationChange({ payload }: any) {
-  console.log({ payload })
   const { location } = payload
-  console.log({ location })
 
   const { pathname } = location || {}
+  const started = yield select(selectors.selectStarted)
+
+  if (!started) {
+    yield take(actions.start.fulfilled)
+  }
 
   try {
     switch (true) {
       case pathname.startsWith('/users'):
-        console.log("lúzerek")
+        console.log('lúzerek', { userActions, putAsync })
         // const { lesson } = params
         yield putAsync(userActions.fetchUsers())
         break
