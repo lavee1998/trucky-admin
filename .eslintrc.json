@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": ["@typescript-eslint", "react"],
+  "globals": {
+    "process": true,
+    "require": true,
+    "module": true
+  },
+  "rules": {
+    "semi": ["warn", "never"],
+    "quotes": ["warn", "single", { "avoidEscape": true }],
+    "jsx-quotes": ["warn", "prefer-double"],
+    "object-curly-spacing": ["warn", "always"],
+    "react-native/no-inline-styles": "off",
+    "no-bitwise": "off",
+    "no-shadow": "off",
+    "no-extra-boolean-cast": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "import/no-anonymous-default-export": "off"
+  }
+}

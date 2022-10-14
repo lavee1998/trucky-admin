@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "ecodrive",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authecodrive412b14dc"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "apiKeyExpirationDate": "2023-10-06T09:53:40.267Z",
+        "keyDescription": "dev"
+      }
+    ]
+  }
+}
