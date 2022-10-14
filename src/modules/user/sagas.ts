@@ -21,9 +21,9 @@ function* fetchUser({ meta }: any) {
   // @ts-ignore
   const result = yield call(() => API.graphql(graphqlOperation(getUser, { id })))
 
-  const lesson = result.data.getLesson
+  const item = result.data.getUser
 
-  return lesson
+  return item
 }
 
 export default [

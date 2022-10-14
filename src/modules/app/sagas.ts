@@ -23,6 +23,7 @@ function* locationChange({ payload }: any) {
   try {
     switch (true) {
       case pathname.startsWith('/users'):
+        console.log("lúzerek")
         // const { lesson } = params
         yield putAsync(userActions.fetchUsers())
         break

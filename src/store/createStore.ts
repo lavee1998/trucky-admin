@@ -3,7 +3,7 @@ import { routerMiddleware } from 'connected-react-router'
 import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 import createRootReducer from './reducers'
-import { sagas as lessonSagas } from '../modules/lesson'
+import { sagas as userSagas } from '../modules/lesson'
 import { sagas as appSagas } from '../modules/app'
 
 const createStore = ({ history }: any) => {
@@ -16,7 +16,7 @@ const createStore = ({ history }: any) => {
   })
 
   sagaMiddleware.run(function* () {
-    yield all([...appSagas, ...lessonSagas])
+    yield all([...appSagas, ...userSagas])
   })
 
   return store
