@@ -9,14 +9,19 @@ import { useAppStart } from '../../modules/app'
 import { AppNavBar } from '../../modules/app'
 import { Routes } from '../navigators'
 
-function App({ signOut, user }) {
+type AppProps = {
+  signOut: (() => void) | undefined
+  user: any
+}
+
+function App({ signOut, user }: AppProps) {
   useAppStart()
 
   return (
-    <div className="App">
+    <React.Fragment>
       <AppNavBar signOut={signOut} />
       <Routes />
-    </div>
+    </React.Fragment>
   )
 }
 

@@ -1,4 +1,4 @@
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, Auth, graphqlOperation } from 'aws-amplify'
 import { call } from 'redux-saga/effects'
 // @ts-ignore
 import { takeLatestAsync } from 'saga-toolkit'
@@ -8,7 +8,12 @@ import * as actions from './slice'
 function* fetchUsers() {
   console.log('fetchUsers')
   // @ts-ignore
-  const result = yield call(() => API.graphql(graphqlOperation(listUsers)))
+  const user = yield call(() => Auth.currentAuthenticatedUser())
+  const user2 = yield call(() => Auth.signIn('kovacslevi1234@gmail.com', 'teszt123'))
+  console.log({ user, user2 })
+  const result = yield call(() =>
+    API.graphql(graphqlOperation(listUsers, undefined, user.signInUserSession.idToken.jwtToken)),
+  )
 
   // @ts-ignore
   const { items } = result.data.listUsers
@@ -19,11 +24,14 @@ function* fetchUsers() {
 function* fetchUser({ meta }: any) {
   const { id } = meta.arg
   // @ts-ignore
-  const result = yield call(() => API.graphql(graphqlOperation(getUser, { id })))
+  try {
+    const result = yield call(() => API.graphql(graphqlOperation(getUser, { id })))
+    const item = result.data.getUser
 
-  const item = result.data.getUser
-
-  return item
+    return item
+  } catch (e) {
+    console.log({ e })
+  }
 }
 
 export default [

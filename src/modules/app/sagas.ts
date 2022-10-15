@@ -1,6 +1,8 @@
 // @ts-ignore
 import { putAsync, takeEveryAsync } from 'saga-toolkit'
 import { actions as userActions } from '../user'
+import { actions as lessonActions } from '../lesson'
+
 import * as actions from './slice'
 import * as selectors from './selectors'
 import { put, takeEvery, select, take } from 'redux-saga/effects'
@@ -8,6 +10,7 @@ import { LOCATION_CHANGE } from 'connected-react-router'
 
 function* appStart() {
   try {
+    
     // yield putAsync(lessonActions.fetchLessons())
   } catch (error) {
     console.error('Error during AppStart:', error)

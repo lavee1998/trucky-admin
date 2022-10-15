@@ -1,11 +1,14 @@
 import React from 'react'
-import { useUser } from '../../../modules/user'
-// import { useLesson } from '../../../modules/lesson'
+import { Page } from '../../../modules/app'
+import { useUser, UserList } from '../../../modules/user'
 
 const List = () => {
   const { users } = useUser()
-  console.log({ users })
-  return <div>List</div>
+  return (
+    <Page title="User list">
+      <UserList items={users} />
+    </Page>
+  )
 }
 
 export default List
