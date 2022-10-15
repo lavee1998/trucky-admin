@@ -4,6 +4,8 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import { NavLink } from 'react-router-dom'
+import { Link } from '@mui/material'
 
 type AppNavBarProps = {
   signOut: (() => void) | undefined
@@ -18,9 +20,14 @@ const AppNavBar = ({ signOut }: AppNavBarProps) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Eco Drive
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div">
+              <Link color="inherit" href="/" sx={{ textDecoration: 'none' }}>
+                Eco Drive
+              </Link>
+            </Typography>
+          </Box>
+
           <Button color="inherit" onClick={handleClickSignOut}>
             Logout
           </Button>
