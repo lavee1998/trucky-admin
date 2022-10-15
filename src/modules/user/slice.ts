@@ -16,6 +16,7 @@ export interface UserActions {
   fetchUsers: () => unknown
   fetchUser: () => unknown
   removeUser: ({ id }: { id: string }) => unknown
+  addUser: ({ file }: { file: File }) => unknown
 }
 
 const initialState: UserState = {
@@ -28,6 +29,7 @@ const initialState: UserState = {
 export const fetchUsers = createSagaAction(`${name}/fetchUsers`)
 export const fetchUser = createSagaAction(`${name}/fetchUser`)
 export const removeUser = createSagaAction(`${name}/removeUser`)
+export const addUser = createSagaAction(`${name}/addUser`)
 
 const handlePending = (state: UserState) => ({
   ...state,
@@ -73,6 +75,13 @@ const slice = createSlice({
       loading: false,
     }),
     [removeUser.rejected]: handleRejected,
+    // add
+    [addUser.pending]: handlePending,
+    [addUser.fulfilled]: (state: UserState, { payload }: { payload: User }) => ({
+      ...state,
+      loading: false,
+    }),
+    [addUser.rejected]: handleRejected,
   },
 })
 

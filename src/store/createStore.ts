@@ -15,7 +15,6 @@ const createStore = ({ history }: any) => {
     middleware: [...getDefaultMiddleware(), routerMiddleware(history), sagaMiddleware],
     devTools: process.env.NODE_ENV !== 'production',
   })
-  console.log({ userSagas })
 
   sagaMiddleware.run(function* () {
     yield all([...appSagas, ...userSagas, ...lessonSagas])

@@ -2,11 +2,10 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { call } from 'redux-saga/effects'
 // @ts-ignore
 import { takeLatestAsync } from 'saga-toolkit'
-import { listUsers, getUser, User } from '../api'
+import { listUsers, getUser } from '../api'
 import * as actions from './slice'
 
 function* fetchUsers() {
-  console.log('fetchUsers')
   // @ts-ignore
   const result = yield call(() => API.graphql(graphqlOperation(listUsers)))
 
@@ -33,8 +32,18 @@ function* removeUser({ meta }: any) {
   return true
 }
 
+function* addUser({ meta }: any) {
+  const { file } = meta.arg
+
+  // @ts-ignore
+  // const result = yield call(() => API.graphql(graphqlOperation(deleteUser, { id })))
+
+  return true
+}
+
 export default [
   takeLatestAsync(actions.fetchUsers.type, fetchUsers),
   takeLatestAsync(actions.fetchUser.type, fetchUser),
   takeLatestAsync(actions.removeUser.type, removeUser),
+  takeLatestAsync(actions.addUser.type, addUser),
 ]

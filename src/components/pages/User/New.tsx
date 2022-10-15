@@ -12,21 +12,21 @@ import {
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import { useHistory } from 'react-router-dom'
 import { Loader } from '../../../modules/app'
+import { useUser } from '../../../modules/user'
 
 const New = () => {
-  const [filename, setFilename] = useState('')
+  const [file, setFile] = useState<null | File>(null)
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+  const { addUser } = useUser()
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return
     }
     const file = e.target.files[0]
-    console.log({ file })
-    const { name } = file
-    setFilename(name)
+    setFile(file)
 
     const reader = new FileReader()
     reader.onload = evt => {
@@ -34,7 +34,6 @@ const New = () => {
         return
       }
       const { result } = evt.target
-      console.log({ result })
     }
     reader.readAsBinaryString(file)
   }
@@ -53,7 +52,9 @@ const New = () => {
 
   const handleUploadUser = async () => {
     setLoading(true)
-    console.log('Add')
+    if (file) {
+      await addUser({ file })
+    }
     setLoading(false)
   }
 
@@ -77,7 +78,7 @@ const New = () => {
             Upload CSV
             <input type="file" accept=".csv" hidden onChange={handleFileUpload} />
           </Button>
-          <Box>{filename}</Box>
+          <Box>{file?.name}</Box>
         </Box>
       </DialogContent>
       <DialogActions>

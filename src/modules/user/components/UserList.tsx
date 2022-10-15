@@ -19,7 +19,6 @@ const UserList = ({ items }: UserListProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [page, setPage] = React.useState(0)
   const match = useRouteMatch()
-  console.log({ match })
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage)
