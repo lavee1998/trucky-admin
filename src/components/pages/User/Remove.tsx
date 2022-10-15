@@ -8,8 +8,8 @@ import {
   DialogTitle,
 } from '@mui/material'
 import { useParams, useHistory } from 'react-router-dom'
-import { useUser } from '../../../modules/user'
-import { Loader } from '../../../modules/app'
+import { useUser } from 'modules/user'
+import { Loader } from 'modules/app'
 
 const RemoveUser = () => {
   const { id } = useParams<{ id: string }>()

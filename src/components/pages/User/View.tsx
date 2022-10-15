@@ -1,7 +1,7 @@
-import { List, ListItem, ListItemText } from '@mui/material'
 import React from 'react'
-import { Page } from '../../../modules/app'
-import { useUser } from '../../../modules/user'
+import { List, ListItem, ListItemText } from '@mui/material'
+import { Page } from 'modules/app'
+import { useUser } from 'modules/user'
 
 const View = () => {
   const { user } = useUser()

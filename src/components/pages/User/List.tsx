@@ -1,8 +1,8 @@
 import React from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Box, Button } from '@mui/material'
-import { Page } from '../../../modules/app'
-import { useUser, UserList } from '../../../modules/user'
+import { Page } from 'modules/app'
+import { useUser, UserList } from 'modules/user'
 
 const List = () => {
   const { users } = useUser()

@@ -1,12 +1,6 @@
 import React from 'react'
-import {
-  Authenticator,
-  ThemeProvider,
-  AmplifyProvider,
-  withAuthenticator,
-} from '@aws-amplify/ui-react'
-import { useAppStart } from '../../modules/app'
-import { AppNavBar } from '../../modules/app'
+import { useAppStart } from 'modules/app'
+import { AppNavBar } from 'modules/app'
 import { Routes } from '../navigators'
 
 type AppProps = {
@@ -25,4 +19,4 @@ function App({ signOut, user }: AppProps) {
   )
 }
 
-export default withAuthenticator(App)
+export default App

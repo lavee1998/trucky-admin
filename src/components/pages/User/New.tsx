@@ -11,8 +11,8 @@ import {
 } from '@mui/material'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 import { useHistory } from 'react-router-dom'
-import { Loader } from '../../../modules/app'
-import { useUser } from '../../../modules/user'
+import { Loader } from 'modules/app'
+import { useUser } from 'modules/user'
 
 const New = () => {
   const [file, setFile] = useState<null | File>(null)

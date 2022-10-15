@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
-import { slice as app } from '../modules/app'
-import { slice as user } from '../modules/user'
+import { slice as app } from 'modules/app'
+import { slice as user } from 'modules/user'
 
 const createRootReducer = ({ history }: any) => {
   const appReducer = combineReducers({
