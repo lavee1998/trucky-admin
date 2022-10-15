@@ -19,6 +19,7 @@ function* locationChange({ payload }: any) {
   const { location } = payload
 
   const { pathname } = location || {}
+  // @ts-ignore
   const started = yield select(selectors.selectStarted)
   const pathParts = pathname.split('/')
   const id = pathParts[2]
@@ -36,6 +37,7 @@ function* locationChange({ payload }: any) {
       case pathname.startsWith('/users/new'):
         break
       case pathname.startsWith('/users'):
+        // @ts-ignore
         const user = yield select(userSelectors.selectUser)
 
         if (user?.id === +user) {

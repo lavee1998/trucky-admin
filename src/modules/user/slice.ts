@@ -15,7 +15,7 @@ export interface UserState {
 export interface UserActions {
   fetchUsers: () => unknown
   fetchUser: () => unknown
-  removeUser: () => unknown
+  removeUser: ({ id }: { id: string }) => unknown
 }
 
 const initialState: UserState = {

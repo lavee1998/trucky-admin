@@ -2,7 +2,7 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { call } from 'redux-saga/effects'
 // @ts-ignore
 import { takeLatestAsync } from 'saga-toolkit'
-import { listUsers, getUser } from '../api'
+import { listUsers, getUser, User } from '../api'
 import * as actions from './slice'
 
 function* fetchUsers() {
@@ -16,7 +16,7 @@ function* fetchUsers() {
   return items
 }
 
-function* fetchUser({ meta }: any) {
+function* fetchUser({ meta }: any): any {
   const { id } = meta.arg
   // @ts-ignore
   const result = yield call(() => API.graphql(graphqlOperation(getUser, { id })))
