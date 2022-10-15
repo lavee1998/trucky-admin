@@ -12,10 +12,9 @@ import { useUser } from '../../../modules/user'
 import { Loader } from '../../../modules/app'
 
 const RemoveUser = () => {
-  console.log('REMOVEE')
   const { id } = useParams()
   const history = useHistory()
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const { user, removeUser } = useUser()
   const [loading, setLoading] = useState(false)
 

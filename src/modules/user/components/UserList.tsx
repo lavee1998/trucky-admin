@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper'
 import { User } from '../../api'
 import { TablePagination } from '@mui/material'
 import { useRouteMatch } from 'react-router-dom'
-import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material'
+import { Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material'
 import NavButton from '../../app/components/NavButton'
 
 type UserListProps = {
@@ -59,8 +59,8 @@ const UserList = ({ items }: UserListProps) => {
               <TableCell align="right">{row.createdAt}</TableCell>
               <TableCell align="right">{row.updatedAt}</TableCell>
               <TableCell align="right">
-                <NavButton to={`${match.url}/${row.id}`} tooltip="Edit">
-                  <EditIcon fontSize="small" />
+                <NavButton to={`${match.url}/${row.id}/view`} tooltip="View">
+                  <VisibilityIcon fontSize="small" />
                 </NavButton>
               </TableCell>
               <TableCell align="right">
