@@ -56,6 +56,7 @@ const New = () => {
       await addUser({ file })
     }
     setLoading(false)
+    handleCancel()
   }
 
   return (
@@ -85,7 +86,11 @@ const New = () => {
         <Button onClick={handleCancel} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleUploadUser} color="primary" disabled={loading}>
+        <Button
+          variant="contained"
+          disabled={!file || loading}
+          onClick={handleUploadUser}
+          color="primary">
           Upload
         </Button>
       </DialogActions>
