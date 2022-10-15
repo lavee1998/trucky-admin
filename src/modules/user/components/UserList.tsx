@@ -76,7 +76,7 @@ const UserList = ({ items }: UserListProps) => {
                 </NavButton>
               </TableCell>
               <TableCell align="right">
-                <NavButton to={`${match.url}/${row.id}/delete`} tooltip="Delete">
+                <NavButton to={`${match.url}/${row.id}/remove`} tooltip="Delete">
                   <DeleteIcon fontSize="small" />
                 </NavButton>
               </TableCell>

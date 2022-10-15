@@ -1,7 +1,7 @@
 import React from 'react'
 
 const View = () => {
-  return 'LessonView'
+  return <div>LessonView</div>
 }
 
 export default View

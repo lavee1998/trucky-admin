@@ -15,6 +15,7 @@ export interface UserState {
 export interface UserActions {
   fetchUsers: () => unknown
   fetchUser: () => unknown
+  removeUser: () => unknown
 }
 
 const initialState: UserState = {
@@ -26,6 +27,7 @@ const initialState: UserState = {
 
 export const fetchUsers = createSagaAction(`${name}/fetchUsers`)
 export const fetchUser = createSagaAction(`${name}/fetchUser`)
+export const removeUser = createSagaAction(`${name}/removeUser`)
 
 const handlePending = (state: UserState) => ({
   ...state,
@@ -41,7 +43,12 @@ const handleRejected = (state: UserState, { error }: { error: Error }) => ({
 const slice = createSlice({
   name,
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser: state => ({
+      ...state,
+      user: null,
+    }),
+  },
   extraReducers: {
     // users
     [fetchUsers.pending]: handlePending,
@@ -59,7 +66,16 @@ const slice = createSlice({
       loading: false,
     }),
     [fetchUser.rejected]: handleRejected,
+    // remove
+    [removeUser.pending]: handlePending,
+    [removeUser.fulfilled]: (state: UserState, { payload }: { payload: User }) => ({
+      ...state,
+      loading: false,
+    }),
+    [removeUser.rejected]: handleRejected,
   },
 })
+
+export const { clearUser } = slice.actions
 
 export default slice.reducer

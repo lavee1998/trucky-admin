@@ -5,11 +5,8 @@ import { Users } from '../pages'
 const AppRoutes = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Users.List}>
-        <Redirect to="/users" />
-      </Route>
-
-      <Route path="/users" component={Users.List} />
+      <Route path="/users" component={Users} />
+      {/* <Route path={['/', '/users', '/users/:id/remove']} exact component={Users.List} /> */}
     </Switch>
   )
 }
