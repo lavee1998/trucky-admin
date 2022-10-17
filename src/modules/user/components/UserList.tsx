@@ -16,10 +16,10 @@ import { User } from 'modules/api'
 type UserListProps = {
   items: User[]
   onClickUserDetails: (user: User) => void
-  onClickUserDelete: (user: User) => void
+  onClickUserRemove: (user: User) => void
 }
 
-const UserList = ({ items, onClickUserDetails, onClickUserDelete }: UserListProps) => {
+const UserList = ({ items, onClickUserDetails, onClickUserRemove }: UserListProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [page, setPage] = React.useState(0)
 
@@ -37,7 +37,6 @@ const UserList = ({ items, onClickUserDetails, onClickUserDelete }: UserListProp
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
             <TableCell align="right">Company ID</TableCell>
             <TableCell align="right">email</TableCell>
             <TableCell align="right">First name</TableCell>
@@ -51,10 +50,9 @@ const UserList = ({ items, onClickUserDetails, onClickUserDelete }: UserListProp
         <TableBody>
           {items.map(row => (
             <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
-                {row.id}
+              <TableCell align="right" component="th" scope="row">
+                {row.companyId}
               </TableCell>
-              <TableCell align="right">{row.companyId}</TableCell>
               <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">{row.firstName}</TableCell>
               <TableCell align="right">{row.lastName}</TableCell>
@@ -66,7 +64,7 @@ const UserList = ({ items, onClickUserDetails, onClickUserDelete }: UserListProp
                 </IconButton>
               </TableCell>
               <TableCell align="right">
-                <IconButton onClick={() => onClickUserDelete}>
+                <IconButton onClick={() => onClickUserRemove(row)}>
                   <DeleteIcon fontSize="small" />
                 </IconButton>
               </TableCell>

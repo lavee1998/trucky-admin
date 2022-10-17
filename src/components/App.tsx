@@ -1,14 +1,13 @@
 import React from 'react'
-import { useAppStart } from 'modules/app'
-import { AppNavBar } from 'modules/app'
-import { Routes } from '../navigators'
+import { useAppStart, AppNavBar } from 'modules/app'
+import Routes from './Routes'
 
 type AppProps = {
   signOut: (() => void) | undefined
   user: any
 }
 
-function App({ signOut, user }: AppProps) {
+const App = ({ signOut }: AppProps) => {
   useAppStart()
 
   return (

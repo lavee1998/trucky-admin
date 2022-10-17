@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { Users } from '../pages'
+import { Users } from './pages'
 
 const AppRoutes = () => {
   return (

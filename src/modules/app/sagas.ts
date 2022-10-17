@@ -1,15 +1,14 @@
 // @ts-ignore
 import { putAsync, takeEveryAsync } from 'saga-toolkit'
-import { actions as userActions, selectors as userSelectors } from '../user'
-
-import * as actions from './slice'
-import * as selectors from './selectors'
 import { put, takeEvery, select, take } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'connected-react-router'
+import { actions as userActions, selectors as userSelectors } from 'modules/user'
+import * as selectors from './selectors'
+import * as actions from './slice'
 
 function* appStart() {
   try {
-    // yield putAsync(lessonActions.fetchLessons())
+    // TODO
   } catch (error) {
     console.error('Error during AppStart:', error)
   }
@@ -47,7 +46,6 @@ function* locationChange({ payload }: any) {
         yield put(userActions.fetchUser({ id }))
         break
       case pathname.startsWith('/users'):
-        // const { lesson } = params
         yield putAsync(userActions.fetchUsers())
         break
 

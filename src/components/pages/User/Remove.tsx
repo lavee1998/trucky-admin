@@ -1,70 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material'
-import { useParams, useHistory } from 'react-router-dom'
-import { useUser } from 'modules/user'
-import { Loader } from 'modules/app'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import { RemoveUserView, useUser } from 'modules/user'
+import { User } from 'modules/api'
 
 const RemoveUser = () => {
-  const { id } = useParams<{ id: string }>()
   const history = useHistory()
-  const [open, setOpen] = useState(false)
   const { user, removeUser } = useUser()
-  const [loading, setLoading] = useState(false)
 
   const goBack = () => {
     history.push('/users')
   }
 
-  const handleCancel = () => {
-    setOpen(false)
+  const handleRemoveUser = async (user: User) => {
+    await removeUser({ id: user.id })
   }
-
-  const handleRemove = async () => {
-    setLoading(true)
-    await removeUser({ id })
-    setLoading(false)
-    handleCancel()
-  }
-
-  useEffect(() => {
-    setOpen(true)
-  }, [])
 
   if (!user) {
     return null
   }
 
-  return (
-    <Dialog
-      fullWidth
-      maxWidth="sm"
-      open={open}
-      onClose={handleCancel}
-      TransitionProps={{ onExited: goBack }}>
-      <DialogTitle id="form-dialog-title">
-        Remove {user?.firstName} {user?.lastName}
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText>Some instruction text can come here.</DialogContentText>
-        <Loader loading={loading} />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleCancel} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleRemove} color="primary" disabled={loading}>
-          Remove
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
+  return <RemoveUserView onGoBack={goBack} onRemoveUser={handleRemoveUser} user={user} />
 }
 
 export default RemoveUser

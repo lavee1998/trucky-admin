@@ -18,7 +18,7 @@ const List = () => {
     history.push(`${match.url}/${user.id}/view`)
   }
 
-  const handleClickUserDelete = (user: User): void => {
+  const handleClickUserRemove = (user: User): void => {
     history.push(`${match.url}/${user.id}/remove`)
   }
 
@@ -26,7 +26,7 @@ const List = () => {
     <Page title="User list">
       <Box marginBottom={4}>
         <UserList
-          onClickUserDelete={handleClickUserDelete}
+          onClickUserRemove={handleClickUserRemove}
           onClickUserDetails={handleClickUserDetails}
           items={users}
         />
