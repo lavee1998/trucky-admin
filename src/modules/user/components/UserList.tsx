@@ -1,26 +1,29 @@
 import React, { useState } from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import { User } from '../../api'
-import { TablePagination } from '@mui/material'
-import { useRouteMatch } from 'react-router-dom'
+import {
+  IconButton,
+  TablePagination,
+  TableRow,
+  Paper,
+  TableContainer,
+  TableCell,
+  TableBody,
+  Table,
+  TableHead,
+} from '@mui/material'
 import { Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material'
-import NavButton from '../../app/components/NavButton'
+import { User } from 'modules/api'
 
 type UserListProps = {
   items: User[]
+  onClickUserDetails: (user: User) => void
+  onClickUserDelete: (user: User) => void
 }
-const UserList = ({ items }: UserListProps) => {
+
+const UserList = ({ items, onClickUserDetails, onClickUserDelete }: UserListProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [page, setPage] = React.useState(0)
-  const match = useRouteMatch()
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage)
   }
 
@@ -58,14 +61,14 @@ const UserList = ({ items }: UserListProps) => {
               <TableCell align="right">{row.createdAt}</TableCell>
               <TableCell align="right">{row.updatedAt}</TableCell>
               <TableCell align="right">
-                <NavButton to={`${match.url}/${row.id}/view`} tooltip="View">
+                <IconButton onClick={() => onClickUserDetails(row)}>
                   <VisibilityIcon fontSize="small" />
-                </NavButton>
+                </IconButton>
               </TableCell>
               <TableCell align="right">
-                <NavButton to={`${match.url}/${row.id}/remove`} tooltip="Delete">
+                <IconButton onClick={() => onClickUserDelete}>
                   <DeleteIcon fontSize="small" />
-                </NavButton>
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}
