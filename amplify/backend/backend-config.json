@@ -53,13 +53,19 @@
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
                 "apiKeyExpirationDays": 365,
-                "apiKeyExpirationDate": "2023-10-06T09:53:40.267Z",
+                "apiKeyExpirationDate": "2023-10-15T09:11:29.559Z",
                 "description": "dev"
               }
             }
           ]
         }
       }
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

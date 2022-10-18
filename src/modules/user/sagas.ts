@@ -1,18 +1,20 @@
 import { API, graphqlOperation } from 'aws-amplify'
-import { call } from 'redux-saga/effects'
+import { call, select } from 'redux-saga/effects'
 // @ts-ignore
 import { takeLatestAsync } from 'saga-toolkit'
 import { listUsers, getUser } from '../api'
 import * as actions from './slice'
+import * as selectors from './selectors'
 
 function* fetchUsers() {
+  const { limit, nextToken }: actions.UserState = yield select(selectors.selectRoot)
   // @ts-ignore
-  const result = yield call(() => API.graphql(graphqlOperation(listUsers)))
-
+  const result = yield call(() => API.graphql(graphqlOperation(listUsers, { limit, nextToken })))
+  console.log({ result })
   // @ts-ignore
-  const { items } = result.data.listUsers
+  const { items, nextToken: newNextToken } = result.data.listUsers
 
-  return items
+  return { items, nextToken: newNextToken }
 }
 
 function* fetchUser({ meta }: any): any {

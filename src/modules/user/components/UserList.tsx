@@ -9,27 +9,41 @@ import {
   TableBody,
   Table,
   TableHead,
+  TableFooter,
 } from '@mui/material'
 import { Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material'
 import { User } from 'modules/api'
 
 type UserListProps = {
   items: User[]
+  onFetchUsers: () => unknown
   onClickUserDetails: (user: User) => void
   onClickUserRemove: (user: User) => void
 }
 
-const UserList = ({ items, onClickUserDetails, onClickUserRemove }: UserListProps) => {
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+const columns: GridColDef[] = [
+  { field: 'firstName', headerName: 'First name', width: 130 },
+  { field: 'lastName', headerName: 'Last name', width: 130 },
+]
+
+const UserList = ({
+  items,
+  onFetchUsers,
+  onClickUserDetails,
+  onClickUserRemove,
+}: UserListProps) => {
+  const [rowsPerPage, setRowsPerPage] = useState(2)
+  const [maxPageNumber, setMaxPageNumber] = React.useState(0)
   const [page, setPage] = React.useState(0)
 
-  const handleChangePage = (_: unknown, newPage: number) => {
-    setPage(newPage)
-  }
+  const handleChangePage = async (_: unknown, newPage: number) => {
+    console.log({ newPage })
+    if (newPage > maxPageNumber) {
+      await onFetchUsers()
+      setMaxPageNumber(newPage)
+    }
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
+    setPage(newPage)
   }
 
   return (
@@ -48,7 +62,10 @@ const UserList = ({ items, onClickUserDetails, onClickUserRemove }: UserListProp
           </TableRow>
         </TableHead>
         <TableBody>
-          {items.map(row => (
+          {(rowsPerPage > 0
+            ? items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : items
+          ).map(row => (
             <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell align="right" component="th" scope="row">
                 {row.companyId}
@@ -71,16 +88,18 @@ const UserList = ({ items, onClickUserDetails, onClickUserRemove }: UserListProp
             </TableRow>
           ))}
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[]}
+              count={-1}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+            />
+          </TableRow>
+        </TableFooter>
       </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={items.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </TableContainer>
   )
 }

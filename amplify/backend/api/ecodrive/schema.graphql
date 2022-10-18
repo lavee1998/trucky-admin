@@ -11,6 +11,13 @@ type User @model @auth(rules: [{ allow: private }]) {
   role: String
 }
 
+type ModelUserConnection {
+  items: [User]!
+  nextToken: String
+  scannedCount: Int
+  count: Int
+}
+
 type Course @model {
   id: ID!
   name: String!

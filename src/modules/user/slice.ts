@@ -9,7 +9,9 @@ export interface UserState {
   loading: boolean
   error: any
   users: User[]
+  limit: number
   user: User | null
+  nextToken: string | null
 }
 
 export interface UserActions {
@@ -23,7 +25,9 @@ const initialState: UserState = {
   loading: false,
   error: null,
   users: [],
+  limit: 2,
   user: null,
+  nextToken: null,
 }
 
 export const fetchUsers = createSagaAction(`${name}/fetchUsers`)
@@ -54,9 +58,15 @@ const slice = createSlice({
   extraReducers: {
     // users
     [fetchUsers.pending]: handlePending,
-    [fetchUsers.fulfilled]: (state: UserState, { payload }: { payload: User[] }) => {
-      state.users = payload
+    [fetchUsers.fulfilled]: (
+      state: UserState,
+      { payload }: { payload: { items: User[]; nextToken: string | null } },
+    ) => {
+      state.users = [...state.users, ...payload.items]
       state.loading = false
+      if (payload.nextToken) {
+        state.nextToken = payload.nextToken
+      }
     },
     [fetchUsers.rejected]: handleRejected,
 

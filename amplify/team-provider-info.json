@@ -1,15 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ecodrive-dev-111105-authRole",
-      "UnauthRoleArn": "arn:aws:iam::476136210137:role/amplify-ecodrive-dev-111105-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::476136210137:role/amplify-ecodrive-dev-111105-authRole",
+      "AuthRoleName": "amplify-ecodrive-dev-110958-authRole",
+      "UnauthRoleArn": "arn:aws:iam::580716346238:role/amplify-ecodrive-dev-110958-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::580716346238:role/amplify-ecodrive-dev-110958-authRole",
       "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-ecodrive-dev-111105-deployment",
-      "UnauthRoleName": "amplify-ecodrive-dev-111105-unauthRole",
-      "StackName": "amplify-ecodrive-dev-111105",
-      "StackId": "arn:aws:cloudformation:eu-west-2:476136210137:stack/amplify-ecodrive-dev-111105/cf480120-4556-11ed-a6f8-06122c0958ae",
-      "AmplifyAppId": "d2un6slr2moepj"
+      "DeploymentBucketName": "amplify-ecodrive-dev-110958-deployment",
+      "UnauthRoleName": "amplify-ecodrive-dev-110958-unauthRole",
+      "StackName": "amplify-ecodrive-dev-110958",
+      "StackId": "arn:aws:cloudformation:eu-west-2:580716346238:stack/amplify-ecodrive-dev-110958/2594f6f0-4c69-11ed-ac28-06f82701bf82",
+      "AmplifyAppId": "d23wbxqf5xfbj6"
     },
     "categories": {
       "auth": {
@@ -17,6 +17,9 @@
       },
       "api": {
         "ecodrive": {}
+      },
+      "hosting": {
+        "S3AndCloudFront": {}
       }
     }
   }

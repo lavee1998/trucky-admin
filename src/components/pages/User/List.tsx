@@ -6,7 +6,7 @@ import { useUser, UserList } from 'modules/user'
 import { User } from 'modules/api'
 
 const List = () => {
-  const { users } = useUser()
+  const { users, fetchUsers } = useUser()
   const history = useHistory()
   const match = useRouteMatch()
 
@@ -22,10 +22,15 @@ const List = () => {
     history.push(`${match.url}/${user.id}/remove`)
   }
 
+  const handleFetchUsers = async () => {
+    await fetchUsers()
+  }
+
   return (
     <Page title="User list">
       <Box marginBottom={4}>
         <UserList
+          onFetchUsers={handleFetchUsers}
           onClickUserRemove={handleClickUserRemove}
           onClickUserDetails={handleClickUserDetails}
           items={users}

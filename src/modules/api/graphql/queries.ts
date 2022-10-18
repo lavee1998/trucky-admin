@@ -34,6 +34,8 @@ export const listUsers = /* GraphQL */ `
         updatedAt
       }
       nextToken
+      scannedCount
+      count
     }
   }
 `;

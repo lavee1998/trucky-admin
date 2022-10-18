@@ -358,6 +358,8 @@ export type ModelUserConnection = {
   __typename: "ModelUserConnection",
   items:  Array<User | null >,
   nextToken?: string | null,
+  scannedCount?: number | null,
+  count?: number | null,
 };
 
 export type ModelCourseFilterInput = {
@@ -966,6 +968,8 @@ export type ListUsersQuery = {
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
+    scannedCount?: number | null,
+    count?: number | null,
   } | null,
 };
 

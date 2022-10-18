@@ -29,7 +29,7 @@ root.render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
-            <Authenticator hideSignUp>
+            <Authenticator hideSignUp variation="modal">
               {({ signOut, user }) => <App signOut={signOut} user={user} />}
             </Authenticator>
           </ConnectedRouter>
