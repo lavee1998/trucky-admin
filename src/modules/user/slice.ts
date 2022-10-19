@@ -12,6 +12,7 @@ export interface UserState {
   limit: number
   user: User | null
   nextToken: string | null
+  total: number
 }
 
 export interface UserActions {
@@ -26,6 +27,7 @@ const initialState: UserState = {
   error: null,
   users: [],
   limit: 2,
+  total: -1,
   user: null,
   nextToken: null,
 }
@@ -62,10 +64,13 @@ const slice = createSlice({
       state: UserState,
       { payload }: { payload: { items: User[]; nextToken: string | null } },
     ) => {
-      state.users = [...state.users, ...payload.items]
       state.loading = false
+      state.users = [...state.users, ...payload.items]
+
       if (payload.nextToken) {
         state.nextToken = payload.nextToken
+      } else {
+        state.total = state.users.length
       }
     },
     [fetchUsers.rejected]: handleRejected,

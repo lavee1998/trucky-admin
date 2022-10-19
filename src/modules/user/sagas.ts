@@ -10,7 +10,7 @@ function* fetchUsers() {
   const { limit, nextToken }: actions.UserState = yield select(selectors.selectRoot)
   // @ts-ignore
   const result = yield call(() => API.graphql(graphqlOperation(listUsers, { limit, nextToken })))
-  console.log({ result })
+
   // @ts-ignore
   const { items, nextToken: newNextToken } = result.data.listUsers
 

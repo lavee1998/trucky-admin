@@ -16,18 +16,15 @@ import { User } from 'modules/api'
 
 type UserListProps = {
   items: User[]
+  total: number
   onFetchUsers: () => unknown
   onClickUserDetails: (user: User) => void
   onClickUserRemove: (user: User) => void
 }
 
-const columns: GridColDef[] = [
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-]
-
 const UserList = ({
   items,
+  total,
   onFetchUsers,
   onClickUserDetails,
   onClickUserRemove,
@@ -37,7 +34,6 @@ const UserList = ({
   const [page, setPage] = React.useState(0)
 
   const handleChangePage = async (_: unknown, newPage: number) => {
-    console.log({ newPage })
     if (newPage > maxPageNumber) {
       await onFetchUsers()
       setMaxPageNumber(newPage)
@@ -92,7 +88,7 @@ const UserList = ({
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[]}
-              count={-1}
+              count={total}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
