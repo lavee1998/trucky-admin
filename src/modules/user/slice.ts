@@ -12,7 +12,8 @@ export interface UserState {
   limit: number
   user: User | null
   nextToken: string | null
-  total: number
+  page: number
+  total: number //max items
 }
 
 export interface UserActions {
@@ -20,14 +21,17 @@ export interface UserActions {
   fetchUser: () => unknown
   removeUser: ({ id }: { id: string }) => unknown
   addUser: ({ file }: { file: File }) => unknown
+  clearUser: () => unknown
+  setPage: (pageNumber: number) => unknown
 }
 
 const initialState: UserState = {
   loading: false,
   error: null,
   users: [],
-  limit: 2,
+  limit: 5,
   total: -1,
+  page: 0,
   user: null,
   nextToken: null,
 }
@@ -52,9 +56,10 @@ const slice = createSlice({
   name,
   initialState,
   reducers: {
-    clearUser: state => ({
+    clearUser: state => initialState,
+    setPage: (state, { payload }: { payload: number }) => ({
       ...state,
-      user: null,
+      page: payload,
     }),
   },
   extraReducers: {
@@ -66,10 +71,9 @@ const slice = createSlice({
     ) => {
       state.loading = false
       state.users = [...state.users, ...payload.items]
+      state.nextToken = payload.nextToken
 
-      if (payload.nextToken) {
-        state.nextToken = payload.nextToken
-      } else {
+      if (!payload.nextToken) {
         state.total = state.users.length
       }
     },
@@ -100,6 +104,6 @@ const slice = createSlice({
   },
 })
 
-export const { clearUser } = slice.actions
+export const { clearUser, setPage } = slice.actions
 
 export default slice.reducer

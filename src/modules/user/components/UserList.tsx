@@ -17,29 +17,32 @@ import { User } from 'modules/api'
 type UserListProps = {
   items: User[]
   total: number
+  limit: number
+  page: number
   onFetchUsers: () => unknown
   onClickUserDetails: (user: User) => void
   onClickUserRemove: (user: User) => void
+  onSetPage: (pageNumber: number) => void
 }
 
 const UserList = ({
   items,
   total,
+  limit,
+  page,
+  onSetPage,
   onFetchUsers,
   onClickUserDetails,
   onClickUserRemove,
 }: UserListProps) => {
-  const [rowsPerPage, setRowsPerPage] = useState(2)
-  const [maxPageNumber, setMaxPageNumber] = React.useState(0)
-  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, _] = useState(limit)
 
   const handleChangePage = async (_: unknown, newPage: number) => {
-    if (newPage > maxPageNumber) {
+    if (newPage > items.length / limit - 1 && items.length !== total) {
       await onFetchUsers()
-      setMaxPageNumber(newPage)
     }
 
-    setPage(newPage)
+    onSetPage(newPage)
   }
 
   return (

@@ -6,7 +6,7 @@ import { useUser, UserList } from 'modules/user'
 import { User } from 'modules/api'
 
 const List = () => {
-  const { users, total, fetchUsers } = useUser()
+  const { users, total, page, limit, fetchUsers, setPage } = useUser()
   const history = useHistory()
   const match = useRouteMatch()
 
@@ -33,8 +33,11 @@ const List = () => {
           onFetchUsers={handleFetchUsers}
           onClickUserRemove={handleClickUserRemove}
           onClickUserDetails={handleClickUserDetails}
+          onSetPage={setPage}
+          page={page}
           items={users}
           total={total}
+          limit={limit}
         />
       </Box>
       <Button variant="contained" color="primary" onClick={handleClickNewUser}>

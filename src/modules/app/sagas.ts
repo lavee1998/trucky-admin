@@ -31,6 +31,7 @@ function* locationChange({ payload }: any) {
     switch (true) {
       case pathname === '/users':
         yield put(userActions.clearUser())
+        // yield put(userActions.clearUsers())
         yield putAsync(userActions.fetchUsers())
         break
       case pathname.startsWith('/users/new'):
