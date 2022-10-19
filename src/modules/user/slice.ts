@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { User } from '../api'
 // @ts-ignore
 import { createSagaAction } from 'saga-toolkit'
+import { User } from '../api'
 
 const name = 'user'
 

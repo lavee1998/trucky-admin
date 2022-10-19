@@ -1,24 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Amplify } from 'aws-amplify'
-import awsExports from './aws-exports'
-import '@aws-amplify/ui-react/styles.css'
 import { Authenticator, AmplifyProvider } from '@aws-amplify/ui-react'
+import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
+import '@aws-amplify/ui-react/styles.css'
+import { ThemeProvider } from '@mui/material'
 import App from './components/App'
+import awsExports from './aws-exports'
 import reportWebVitals from './reportWebVitals'
 import { createStore } from './store'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from '@mui/material'
+import './index.css'
 import theme from './theme'
 
 const history = createBrowserHistory()
 const store = createStore({
   history,
 })
-
-// awsExports.aws_appsync_authenticationType = 'API_KEY'
 
 Amplify.configure(awsExports)
 
