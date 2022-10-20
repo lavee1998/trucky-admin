@@ -20,7 +20,7 @@ const Page = ({ children, title }: PageProps) => {
           padding: theme.spacing(5),
         }}>
         {!!title && <Typography variant="h5">{title}</Typography>}
-        <Box sx={{ marginTop: theme.spacing(5) }}>{children}</Box>
+        <Box>{children}</Box>
       </Paper>
     </Container>
   )

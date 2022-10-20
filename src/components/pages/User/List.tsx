@@ -6,7 +6,7 @@ import { useUser, UserList } from 'modules/user'
 import { User } from 'modules/api'
 
 const List = () => {
-  const { users, total, page, limit, fetchUsers, setPage } = useUser()
+  const { users, total, page, limit, clearUser, setSearch, search, fetchUsers, setPage } = useUser()
   const history = useHistory()
   const match = useRouteMatch()
 
@@ -26,22 +26,30 @@ const List = () => {
     await fetchUsers()
   }
 
+  const handleSearch = async (search: string) => {
+    clearUser()
+    setSearch(search)
+    await fetchUsers()
+  }
+
   return (
-    <Page title="User list">
+    <Page title="">
       <Box marginBottom={4}>
         <UserList
           onFetchUsers={handleFetchUsers}
           onClickUserRemove={handleClickUserRemove}
           onClickUserDetails={handleClickUserDetails}
+          onSearch={handleSearch}
           onSetPage={setPage}
           page={page}
           items={users}
           total={total}
           limit={limit}
+          filter={search}
         />
       </Box>
       <Button variant="contained" color="primary" onClick={handleClickNewUser}>
-        Add new user
+        Upload users
       </Button>
     </Page>
   )

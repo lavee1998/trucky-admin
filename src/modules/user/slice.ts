@@ -14,6 +14,7 @@ export interface UserState {
   nextToken: string | null
   page: number
   total: number //max items
+  search: string //company name
 }
 
 export interface UserActions {
@@ -22,6 +23,7 @@ export interface UserActions {
   removeUser: ({ id }: { id: string }) => unknown
   addUser: ({ file }: { file: File }) => unknown
   clearUser: () => unknown
+  setSearch: (search: string) => unknown
   setPage: (pageNumber: number) => unknown
 }
 
@@ -34,6 +36,7 @@ const initialState: UserState = {
   page: 0,
   user: null,
   nextToken: null,
+  search: '',
 }
 
 export const fetchUsers = createSagaAction(`${name}/fetchUsers`)
@@ -56,6 +59,10 @@ const slice = createSlice({
   name,
   initialState,
   reducers: {
+    setSearch: (state, { payload }: { payload: string }) => ({
+      ...state,
+      search: payload,
+    }),
     clearUser: state => initialState,
     setPage: (state, { payload }: { payload: number }) => ({
       ...state,
@@ -104,6 +111,6 @@ const slice = createSlice({
   },
 })
 
-export const { clearUser, setPage } = slice.actions
+export const { clearUser, setPage, setSearch } = slice.actions
 
 export default slice.reducer

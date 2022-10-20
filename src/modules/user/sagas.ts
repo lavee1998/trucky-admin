@@ -7,11 +7,21 @@ import * as actions from './slice'
 import * as selectors from './selectors'
 
 function* fetchUsers() {
-  const { limit, users, nextToken, total }: actions.UserState = yield select(selectors.selectRoot)
+  const { limit, users, nextToken, total, search }: actions.UserState = yield select(
+    selectors.selectRoot,
+  )
   if (users.length === total) throw new Error('Total user reached')
 
   // @ts-ignore
-  const result = yield call(() => API.graphql(graphqlOperation(listUsers, { limit, nextToken })))
+  const result = yield call(() =>
+    API.graphql(
+      graphqlOperation(listUsers, {
+        limit,
+        nextToken,
+        filter: { companyId: { contains: search } },
+      }),
+    ),
+  )
 
   // @ts-ignore
   const { items, nextToken: newNextToken } = result.data.listUsers
